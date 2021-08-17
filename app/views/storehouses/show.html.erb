@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @storehouse.title %>
+</p>
+
+<p>
+  <strong>District:</strong>
+  <%= @storehouse.district %>
+</p>
+
+<%= link_to 'Edit', edit_storehouse_path(@storehouse) %> |
+<%= link_to 'Back', storehouses_path %>

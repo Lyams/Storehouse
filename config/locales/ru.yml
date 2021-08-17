@@ -1,0 +1,11 @@
+ru:
+  enumerize:
+    storehouse:
+      central: 'Центральный'
+      northwestern: 'Северо-Западный'
+      southern: 'Южный'
+      north_caucasian: 'Северо-Кавказский'
+      volga: 'Приволжский'
+      ural: 'Уральский'
+      siberian: 'Сибирский'
+      far_eastern: 'Дальневосточный'

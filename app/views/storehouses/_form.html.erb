@@ -1,0 +1,27 @@
+<%= form_with(model: storehouse) do |form| %>
+  <% if storehouse.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(storehouse.errors.count, "error") %> prohibited this storehouse from being saved:</h2>
+
+      <ul>
+        <% storehouse.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :district %>
+    <%= form.text_field :district %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,5 +1,5 @@
 class StorehousesController < ApplicationController
-  before_action :set_storehouse, only: %i[ show edit update destroy ]
+  before_action :set_storehouse, only: %i[show update destroy]
 
   # GET /storehouses or /storehouses.json
   def index
@@ -7,16 +7,11 @@ class StorehousesController < ApplicationController
   end
 
   # GET /storehouses/1 or /storehouses/1.json
-  def show
-  end
+  def show; end
 
   # GET /storehouses/new
   def new
     @storehouse = Storehouse.new
-  end
-
-  # GET /storehouses/1/edit
-  def edit
   end
 
   # POST /storehouses or /storehouses.json
@@ -25,7 +20,7 @@ class StorehousesController < ApplicationController
 
     respond_to do |format|
       if @storehouse.save
-        format.html { redirect_to @storehouse, notice: "Storehouse was successfully created." }
+        format.html { redirect_to @storehouse, notice: 'Storehouse was successfully created.' }
         format.json { render :show, status: :created, location: @storehouse }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -51,19 +46,20 @@ class StorehousesController < ApplicationController
   def destroy
     @storehouse.destroy
     respond_to do |format|
-      format.html { redirect_to storehouses_url, notice: "Storehouse was successfully destroyed." }
+      format.html { redirect_to storehouses_url, notice: 'Storehouse was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_storehouse
-      @storehouse = Storehouse.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def storehouse_params
-      params.require(:storehouse).permit(:title, :district)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_storehouse
+    @storehouse = Storehouse.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def storehouse_params
+    params.require(:storehouse).permit(:title, :district)
+  end
 end

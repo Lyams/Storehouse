@@ -1,12 +1,12 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Storehouses</h1>
+<h1><%= t 'storehouse.list'%></h1>
 
 <table>
   <thead>
     <tr>
-      <th>Title</th>
-      <th>District</th>
+      <th><%=t 'storehouse.title' %></th>
+      <th><%=t :district %></th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -15,10 +15,9 @@
     <% @storehouses.each do |storehouse| %>
       <tr>
         <td><%= storehouse.title %></td>
-        <td><%= storehouse.district %></td>
-        <td><%= link_to 'Show', storehouse %></td>
-        <td><%= link_to 'Edit', edit_storehouse_path(storehouse) %></td>
-        <td><%= link_to 'Destroy', storehouse, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= storehouse.district_text %></td>
+        <td><%= link_to (t 'storehouse.show'), storehouse %></td>
+        <td><%= link_to (t 'storehouse.del'), storehouse, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +25,4 @@
 
 <br>
 
-<%= link_to 'New Storehouse', new_storehouse_path %>
+<%= link_to (t 'storehouse.new'), new_storehouse_path %>

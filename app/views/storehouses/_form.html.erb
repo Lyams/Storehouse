@@ -12,16 +12,16 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
+    <%= form.label t 'storehouse.title' %>
+    <%= form.text_field :title, minlength: 2, placeholder: (t :template_title) %>
   </div>
 
   <div class="field">
-    <%= form.label :district %>
-    <%= form.text_field :district %>
+    <%= form.label t :district %>
+    <%= form.select :district, i18n_array_disrict %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit t 'storehouse.new' %>
   </div>
 <% end %>

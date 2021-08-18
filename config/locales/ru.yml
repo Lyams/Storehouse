@@ -1,11 +1,22 @@
 ru:
+  template_title: 'Уникальное имя создаваемого склада, от 2 символов длиной'
+  district: 'Регион'
+  back: 'Назад'
+  storehouse:
+    list: 'Список складов'
+    new_title: 'Создание склада'
+    new: 'Создать склад'
+    title: 'Название склада'
+    del: 'Удалить склад'
+    show: 'на страницу “Склад”'
   enumerize:
     storehouse:
-      central: 'Центральный'
-      northwestern: 'Северо-Западный'
-      southern: 'Южный'
-      north_caucasian: 'Северо-Кавказский'
-      volga: 'Приволжский'
-      ural: 'Уральский'
-      siberian: 'Сибирский'
-      far_eastern: 'Дальневосточный'
+      district:
+        central: 'Центральный'
+        northwestern: 'Северо-Западный'
+        southern: 'Южный'
+        north_caucasian: 'Северо-Кавказский'
+        volga: 'Приволжский'
+        ural: 'Уральский'
+        siberian: 'Сибирский'
+        far_eastern: 'Дальневосточный'

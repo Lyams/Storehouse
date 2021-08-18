@@ -34,18 +34,18 @@ class StorehousesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /storehouses/1 or /storehouses/1.json
-  def update
-    respond_to do |format|
-      if @storehouse.update(storehouse_params)
-        format.html { redirect_to @storehouse, notice: "Storehouse was successfully updated." }
-        format.json { render :show, status: :ok, location: @storehouse }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @storehouse.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  # # PATCH/PUT /storehouses/1 or /storehouses/1.json
+  # def update
+  #   respond_to do |format|
+  #     if @storehouse.update(storehouse_params)
+  #       format.html { redirect_to @storehouse, notice: "Storehouse was successfully updated." }
+  #       format.json { render :show, status: :ok, location: @storehouse }
+  #     else
+  #       format.html { render :edit, status: :unprocessable_entity }
+  #       format.json { render json: @storehouse.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
 
   # DELETE /storehouses/1 or /storehouses/1.json
   def destroy

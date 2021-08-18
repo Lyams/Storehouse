@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root to: 'storehouses#index'
   resources :storehouses do
     resources :things
   end

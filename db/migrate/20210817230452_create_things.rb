@@ -3,7 +3,7 @@ class CreateThings < ActiveRecord::Migration[6.1]
     create_table :things do |t|
       t.integer :value
       t.references :commodity, null: false, foreign_key: true
-      t.references :storehouse, null: false, foreign_key: true
+      t.references :shipment, polymorphic: true, null: false
 
       t.timestamps
     end

@@ -1,0 +1,25 @@
+<h1><%= t 'delivery.new'%></h1>
+<%= form_with   do |form| %>
+<table>
+  <thead>
+  <tr>
+    <th><%=t 'commodity.name' %></th>
+    <th><%=t 'delivery.count' %></th>
+    <th colspan="2"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @commodities.each do |commodity| %>
+    <tr>
+      <th>  <%= form.label commodity.name %>
+        <%= form.hidden_field commodity %></th>
+      <th>  <%= form.number_field :value %> </th>
+      <% end %>
+    </tr>
+  </tbody>
+</table>
+  <div class="actions">
+    <%= form.submit t 'delivery.new' %>
+  </div>
+<% end %>

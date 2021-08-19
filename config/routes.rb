@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root to: 'storehouses#index'
   resources :storehouses do
+    resources :deliveries
     resources :things
   end
   resources :commodities

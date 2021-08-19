@@ -7,7 +7,9 @@ class StorehousesController < ApplicationController
   end
 
   # GET /storehouses/1 or /storehouses/1.json
-  def show; end
+  def show
+    @things = @storehouse.things
+  end
 
   # GET /storehouses/new
   def new

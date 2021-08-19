@@ -1,5 +1,5 @@
 <h1><%= t 'delivery.new'%></h1>
-<%= form_with   do |form| %>
+<%= form_with(model: [@storehouse, @delivery], local: true)  do |delivery_form| %>
 <table>
   <thead>
   <tr>
@@ -10,16 +10,20 @@
   </thead>
 
   <tbody>
-  <% @commodities.each do |commodity| %>
+  <%= delivery_form.hidden_field :storehouse_id, value: @storehouse.id %>
+  <% @things.each do |thing| %>
+    <%= delivery_form.fields_for thing, index: thing.commodity.id do |thing_form| %>
     <tr>
-      <th>  <%= form.label commodity.name %>
-        <%= form.hidden_field commodity %></th>
-      <th>  <%= form.number_field :value %> </th>
-      <% end %>
+      <th>  <%= thing_form.label thing.commodity.name %>
+        <%= thing_form.hidden_field :commodity_id, value: thing.commodity.id  %>
+      </th>
+      <th>  <%= thing_form.number_field :value %> </th>
     </tr>
+    <% end %>
+    <% end %>
+
   </tbody>
+
 </table>
-  <div class="actions">
-    <%= form.submit t 'delivery.new' %>
-  </div>
-<% end %>
+<%= delivery_form.submit (t 'delivery.new') %>
+  <% end %>

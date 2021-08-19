@@ -19,8 +19,10 @@ ActiveRecord::Schema.define(version: 2021_08_19_205834) do
   end
 
   create_table "deliveries", force: :cascade do |t|
+    t.integer "storehouse_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["storehouse_id"], name: "index_deliveries_on_storehouse_id"
   end
 
   create_table "storehouses", force: :cascade do |t|
@@ -41,5 +43,6 @@ ActiveRecord::Schema.define(version: 2021_08_19_205834) do
     t.index ["shipment_type", "shipment_id"], name: "index_things_on_shipment"
   end
 
+  add_foreign_key "deliveries", "storehouses"
   add_foreign_key "things", "commodities"
 end

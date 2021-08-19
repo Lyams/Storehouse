@@ -1,0 +1,6 @@
+<% @deliveries.each do |delivery| %>
+  <% delivery.things.each do |thing| %>
+    <%= thing.commodity.name %> : <%= thing.value %>
+  <% end %>
+  <br>
+<% end %>

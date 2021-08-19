@@ -13,11 +13,11 @@
   <tbody>
   <% @things.each do |thing| %>
     <tr>
-      <td><%= thing.comodity.name %></td>
+      <td><%= thing.commodity.name %></td>
       <td><%= thing.value %></td>
       <td> Здесь должна быть дата последней доставки</td>
-      <td><%= link_to (t 'storehouse.show'), storehouse %></td>
-      <td><%= link_to (t 'storehouse.del'), storehouse, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <td><%= link_to (t 'storehouse.show'), @storehouse %></td>
+      <td><%= link_to (t 'storehouse.del'), @storehouse, method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>
   <% end %>
   </tbody>

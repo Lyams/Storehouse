@@ -46,10 +46,14 @@ class StorehousesController < ApplicationController
 
   # DELETE /storehouses/1 or /storehouses/1.json
   def destroy
+    if @storehouse.things.blank?
     @storehouse.destroy
     respond_to do |format|
       format.html { redirect_to storehouses_url, notice: 'Storehouse was successfully destroyed.' }
       format.json { head :no_content }
+    end
+    else
+      redirect_to @storehouse, notice: 'Склад нельзя удалять, если на нём есть товары'
     end
   end
 

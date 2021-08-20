@@ -7,6 +7,7 @@
     <tr>
       <th><%=t 'storehouse.title' %></th>
       <th><%=t 'storehouse.data' %></th>
+      <th><%= t 'doing' %></th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -25,4 +26,4 @@
 
 <br>
 
-<%= link_to (t 'storehouse.new'), new_storehouse_path %>
+<%= button_to (t 'storehouse.new'), new_storehouse_path, method: :get %>

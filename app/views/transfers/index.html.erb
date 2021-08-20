@@ -1,0 +1,15 @@
+<% @transfers_send.each do |transfer| %>
+  <h1> Отправлено с этого склада </h1>
+  <% transfer.things.each do |thing| %>
+    <%= thing.commodity.name %> : <%= thing.value %>
+  <% end %>
+  <br>
+<% end %>
+
+<% @transfers_recip.each do |transfer| %>
+  <h1> Получено этим складом </h1>
+  <% transfer.things.each do |thing| %>
+    <%= thing.commodity.name %> : <%= thing.value %>
+  <% end %>
+  <br>
+<% end %>

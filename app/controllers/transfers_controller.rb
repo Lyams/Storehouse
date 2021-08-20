@@ -1,4 +1,11 @@
 class TransfersController < ApplicationController
+
+  def index
+      @storehouse = Storehouse.find(params[:storehouse_id])
+      @transfers_send = Transfer.where(sender: @storehouse)
+      @transfers_recip = Transfer.where(recipient: @storehouse)
+  end
+
   def new
     @sender = Storehouse.find(storehouses_params[:sender_id])
     @recipient = Storehouse.find(storehouses_params[:recipient_id])
@@ -22,6 +29,7 @@ class TransfersController < ApplicationController
         was_recipient_thing = @recipient.things.where(commodity_id: thing.commodity_id).first
         was_recipient_thing = Thing.new(shipment: @recipient, value: 0, commodity_id: thing.commodity_id) if was_recipient_thing.nil?
         was_recipient_thing.update(value: (was_recipient_thing.value + thing.value) )
+        thing.save
         end
       end
     respond_to do |format|

@@ -15,4 +15,5 @@
 <br>
 <%= link_to 'Передача товаров',  new_choose_storehouse_path %>
 <br>
+<%= link_to 'История передач товара', transfers_path(storehouse_id: @storehouse.id) %>
 <%= link_to (t :back), storehouses_path %>

@@ -17,12 +17,10 @@ class DeliveriesController < ApplicationController
     @delivery = Delivery.new(delivery_params)
     @delivery.save
     @storehouse = @delivery.storehouse
+    Delivery.transaction do
     @things = things_params[:thing].each do |param|
-      p "Отладочное сообщение #{param}"
       thing = Thing.new(param[1])
-      # thing.commodity_id = param[:commodity_id].to_i
-      # val = param[:value].to_i
-      if  thing.value.present? && thing.value > 0
+      if thing.value.present? && thing.value > 0
         thing.shipment = @delivery
         t = Thing.new(commodity_id: thing.commodity_id, value: thing.value, shipment: @storehouse)
         thing.save
@@ -33,12 +31,13 @@ class DeliveriesController < ApplicationController
         end
       end
     end
-    respond_to do |format|
-      if true # @delivery.save
-        format.html { redirect_to @delivery.storehouse, notice: 'Delivery was successfully created.' }
+      if @things.present?
+        redirect_to @delivery.storehouse, notice: 'Delivery was successfully created.'
       else
-        format.html { render :new, status: :unprocessable_entity }
+        render :new, status: :unprocessable_entity
       end
+    rescue ActiveRecord::RecordInvalid
+      render :new, status: :unprocessable_entity
     end
   end
 

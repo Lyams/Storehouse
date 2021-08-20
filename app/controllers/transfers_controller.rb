@@ -1,9 +1,9 @@
 class TransfersController < ApplicationController
 
   def index
-      @storehouse = Storehouse.find(params[:storehouse_id])
-      @transfers_send = Transfer.where(sender: @storehouse)
-      @transfers_recip = Transfer.where(recipient: @storehouse)
+    @storehouse = Storehouse.find(params[:storehouse_id])
+    @transfers_send = Transfer.where(sender: @storehouse)
+    @transfers_recip = Transfer.where(recipient: @storehouse)
   end
 
   def new
@@ -13,31 +13,34 @@ class TransfersController < ApplicationController
     @commodities = Commodity.all
     @things = @sender.things
   end
+
   def create
     @transfer = Transfer.new(transfer_params)
-    @transfer.save
     @sender = @transfer.sender
     @recipient = @transfer.recipient
-    @things = things_params[:thing].each do |param|
-      thing = Thing.new(param[1])
-      if thing.value.present? && thing.value > 0
-        was_sender_thing = @sender.things.where(commodity_id: thing.commodity_id).first
-        thing.value = was_sender_thing.value if thing.value > was_sender_thing.value
-        thing.shipment = @transfer
-        diff = was_sender_thing.value - thing.value
-        diff > 0 ? was_sender_thing.update(value: diff ) : was_sender_thing.destroy
-        was_recipient_thing = @recipient.things.where(commodity_id: thing.commodity_id).first
-        was_recipient_thing = Thing.new(shipment: @recipient, value: 0, commodity_id: thing.commodity_id) if was_recipient_thing.nil?
-        was_recipient_thing.update(value: (was_recipient_thing.value + thing.value) )
-        thing.save
+    Transfer.transaction do
+      @things = things_params[:thing].each do |param|
+        thing = Thing.new(param[1])
+        if thing.value.present? && thing.value > 0
+          was_sender_thing = @sender.things.where(commodity_id: thing.commodity_id).first
+          thing.value = was_sender_thing.value if thing.value > was_sender_thing.value
+          thing.shipment = @transfer
+          diff = was_sender_thing.value - thing.value
+          diff > 0 ? was_sender_thing.update(value: diff) : was_sender_thing.destroy
+          was_recipient_thing = @recipient.things.where(commodity_id: thing.commodity_id).first
+          was_recipient_thing = Thing.new(shipment: @recipient, value: 0, commodity_id: thing.commodity_id) if was_recipient_thing.nil?
+          was_recipient_thing.update(value: (was_recipient_thing.value + thing.value))
+          thing.save
         end
       end
-    respond_to do |format|
-      if true # @delivery.save
-        format.html { redirect_to @recipient, notice: 'Transaction was successfully created.' }
+      if @things.present?
+        @transfer.save
+        redirect_to @recipient, notice: 'Transaction was successfully created.'
       else
-        format.html { render :new, status: :unprocessable_entity }
+        render :new, status: :unprocessable_entity
       end
+    rescue ActiveRecord::RecordInvalid
+      render :new, status: :unprocessable_entity
     end
   end
 

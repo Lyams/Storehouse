@@ -50,7 +50,7 @@ class DeliveriesController < ApplicationController
   private
 
   def delivery_params
-    params.require(:delivery).permit(:storehouse_id)
+    params.require(:delivery).permit(:storehouse_id, :date_of_delivery)
   end
   def things_params
     params.require(:delivery).permit(thing: [:commodity_id, :value])

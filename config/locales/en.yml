@@ -30,4 +30,9 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  new_storehouse: 'New Storehouse'
   hello: "Hello world"
+  template_title: "This is title. Minimum length = 2"
+  enumerize:
+    storehouse:
+      district:

@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <strong>Title:</strong>
   <%= @storehouse.title %>
@@ -10,5 +8,11 @@
   <%= @storehouse.district %>
 </p>
 
-<%= link_to 'Edit', edit_storehouse_path(@storehouse) %> |
-<%= link_to 'Back', storehouses_path %>
+<%= render template: 'things/index'%>
+<%= link_to (t 'delivery.new'),  new_storehouse_delivery_path(@storehouse) %>
+<br>
+<%= link_to 'История доставок',  storehouse_deliveries_path(@storehouse) %>
+<br>
+<%= link_to 'Передача товаров',  new_choose_storehouse_path %>
+<br>
+<%= link_to (t :back), storehouses_path %>

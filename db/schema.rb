@@ -10,7 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_17_003644) do
+ActiveRecord::Schema.define(version: 2021_08_20_000149) do
+
+  create_table "commodities", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "deliveries", force: :cascade do |t|
+    t.integer "storehouse_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["storehouse_id"], name: "index_deliveries_on_storehouse_id"
+  end
 
   create_table "storehouses", force: :cascade do |t|
     t.string "title"
@@ -19,4 +32,28 @@ ActiveRecord::Schema.define(version: 2021_08_17_003644) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "things", force: :cascade do |t|
+    t.integer "value"
+    t.integer "commodity_id", null: false
+    t.string "shipment_type", null: false
+    t.integer "shipment_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["commodity_id"], name: "index_things_on_commodity_id"
+    t.index ["shipment_type", "shipment_id"], name: "index_things_on_shipment"
+  end
+
+  create_table "transfers", force: :cascade do |t|
+    t.integer "sender_id"
+    t.integer "recipient_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["recipient_id"], name: "index_transfers_on_recipient_id"
+    t.index ["sender_id"], name: "index_transfers_on_sender_id"
+  end
+
+  add_foreign_key "deliveries", "storehouses"
+  add_foreign_key "things", "commodities"
+  add_foreign_key "transfers", "storehouses", column: "recipient_id"
+  add_foreign_key "transfers", "storehouses", column: "sender_id"
 end

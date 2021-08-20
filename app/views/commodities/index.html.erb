@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<h1><%= t 'commodity.list'%></h1>
+
+<table>
+  <thead>
+  <tr>
+    <th><%=t 'commodity.name' %></th>
+    <th><%=t 'commodity.date_of_creation' %></th>
+    <th><%=t 'commodity.date_of_editing' %></th>
+    <th colspan="4"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @commodities.each do |commodity| %>
+    <tr>
+      <td><%= commodity.name %></td>
+      <td><%= commodity.created_at %></td>
+      <td><%= commodity.updated_at %></td>
+      <td><%= link_to (t 'commodity.edit'), edit_commodity_path(commodity)  %>
+      <%= link_to (t 'commodity.del'), commodity, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to (t 'commodity.new'), new_commodity_path %>

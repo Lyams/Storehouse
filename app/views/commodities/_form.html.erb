@@ -1,0 +1,22 @@
+<%= form_with(model: commodity) do |form| %>
+  <% if commodity.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(commodity.errors.count, "error") %> prohibited this commodity from being saved:</h2>
+
+      <ul>
+        <% commodity.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label t 'commodity.name' %>
+    <%= form.text_field :name, minlength: 2, placeholder: (t 'commodity.template_title') %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,34 @@
+<h1><%= t 'delivery.new'%></h1>
+<%= form_with(model:  @transfer)  do |transfer_form| %>
+  <table>
+    <thead>
+    <tr>
+      <th><%=t 'commodity.name' %></th>
+      <th><%='Количество товара у отправителя' %></th>
+      <th><%=t 'delivery.count' %></th>
+      <th><%='Количество товаров у получателя' %>
+      <th colspan="2"></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <%= transfer_form.hidden_field :sender_id, value: @sender.id %>
+    <%= transfer_form.hidden_field :recipient_id, value: @recipient.id %>
+    <% @things.each do |thing| %>
+      <%= transfer_form.fields_for thing, index: thing.commodity.id do |thing_form| %>
+        <tr>
+          <th>  <%= thing_form.label thing.commodity.name %> </th>
+          <th>  <%= thing_form.label thing.value %>
+            <%= thing_form.hidden_field :commodity_id, value: thing.commodity.id  %>
+          </th>
+          <th>  <%= thing_form.number_field :value %> </th>
+          <th> <%= thing_form.label @recipient.things.where(commodity_id: thing.commodity_id).first&.value || 0 %></th>
+        </tr>
+      <% end %>
+    <% end %>
+
+    </tbody>
+
+  </table>
+  <%= transfer_form.submit ("Завершить процесс передачи товаров") %>
+<% end %>

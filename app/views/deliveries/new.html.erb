@@ -1,0 +1,29 @@
+<h1><%= t 'delivery.new'%></h1>
+<%= form_with(model: [@storehouse, @delivery], local: true)  do |delivery_form| %>
+<table>
+  <thead>
+  <tr>
+    <th><%=t 'commodity.name' %></th>
+    <th><%=t 'delivery.count' %></th>
+    <th colspan="2"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <%= delivery_form.hidden_field :storehouse_id, value: @storehouse.id %>
+  <% @things.each do |thing| %>
+    <%= delivery_form.fields_for thing, index: thing.commodity.id do |thing_form| %>
+    <tr>
+      <th>  <%= thing_form.label thing.commodity.name %>
+        <%= thing_form.hidden_field :commodity_id, value: thing.commodity.id  %>
+      </th>
+      <th>  <%= thing_form.number_field :value %> </th>
+    </tr>
+    <% end %>
+    <% end %>
+
+  </tbody>
+
+</table>
+<%= delivery_form.submit (t 'delivery.new') %>
+  <% end %>

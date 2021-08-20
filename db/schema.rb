@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_19_205834) do
+ActiveRecord::Schema.define(version: 2021_08_20_000149) do
 
   create_table "commodities", force: :cascade do |t|
     t.string "name"
@@ -43,6 +43,17 @@ ActiveRecord::Schema.define(version: 2021_08_19_205834) do
     t.index ["shipment_type", "shipment_id"], name: "index_things_on_shipment"
   end
 
+  create_table "transfers", force: :cascade do |t|
+    t.integer "sender_id"
+    t.integer "recipient_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["recipient_id"], name: "index_transfers_on_recipient_id"
+    t.index ["sender_id"], name: "index_transfers_on_sender_id"
+  end
+
   add_foreign_key "deliveries", "storehouses"
   add_foreign_key "things", "commodities"
+  add_foreign_key "transfers", "storehouses", column: "recipient_id"
+  add_foreign_key "transfers", "storehouses", column: "sender_id"
 end

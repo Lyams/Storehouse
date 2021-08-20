@@ -10,5 +10,9 @@
 
 <%= render template: 'things/index'%>
 <%= link_to (t 'delivery.new'),  new_storehouse_delivery_path(@storehouse) %>
+<br>
 <%= link_to 'История доставок',  storehouse_deliveries_path(@storehouse) %>
+<br>
+<%= link_to 'Передача товаров',  new_choose_storehouse_path %>
+<br>
 <%= link_to (t :back), storehouses_path %>

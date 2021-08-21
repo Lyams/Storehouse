@@ -19,7 +19,8 @@ class TransfersController < ApplicationController
     @sender = @transfer.sender
     @recipient = @transfer.recipient
     Transfer.transaction do
-      @things = things_params[:thing].each do |param|
+      @things = []
+        things_params[:thing].each do |param|
         thing = Thing.new(param[1])
         if thing.value.present? && thing.value > 0
           was_sender_thing = @sender.things.where(commodity_id: thing.commodity_id).first
@@ -31,16 +32,19 @@ class TransfersController < ApplicationController
           was_recipient_thing = Thing.new(shipment: @recipient, value: 0, commodity_id: thing.commodity_id) if was_recipient_thing.nil?
           was_recipient_thing.update(value: (was_recipient_thing.value + thing.value))
           thing.save
+          @things = thing
         end
       end
       if @things.present?
         @transfer.save
         redirect_to @recipient, notice: 'Transaction was successfully created.'
       else
-        render :new, status: :unprocessable_entity
+        redirect_to new_transfer_path(sender_id:  @sender.id, recipient_id: @recipient.id),
+                    notice: 'Неверно заполненные поля'
       end
     rescue ActiveRecord::RecordInvalid
-      render :new, status: :unprocessable_entity
+      redirect_to new_transfer_path(sender_id:  @sender.id, recipient_id: @recipient.id),
+                  notice: 'Что-то пошло не так, попробуйте ещё раз'
     end
   end
 

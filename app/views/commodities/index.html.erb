@@ -15,8 +15,8 @@
   <% @commodities.each do |commodity| %>
     <tr>
       <td><%= commodity.name %></td>
-      <td><%= commodity.created_at %></td>
-      <td><%= commodity.updated_at %></td>
+      <td><%= commodity.created_at.strftime("%Y-%m-%d") %></td>
+      <td><%= commodity.updated_at.strftime("%Y-%m-%d") %></td>
       <td><%= link_to (t 'commodity.edit'), edit_commodity_path(commodity)  %>
       <%= link_to (t 'commodity.del'), commodity, method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>

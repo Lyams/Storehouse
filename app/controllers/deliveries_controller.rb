@@ -15,29 +15,32 @@ class DeliveriesController < ApplicationController
 
   def create
     @delivery = Delivery.new(delivery_params)
-    @delivery.save
     @storehouse = @delivery.storehouse
+    @things = []
     Delivery.transaction do
-    @things = things_params[:thing].each do |param|
-      thing = Thing.new(param[1])
-      if thing.value.present? && thing.value > 0
-        thing.shipment = @delivery
-        t = Thing.new(commodity_id: thing.commodity_id, value: thing.value, shipment: @storehouse)
-        thing.save
-        if ist = Thing.where(commodity_id: thing.commodity_id, shipment_id: @storehouse.id, shipment_type: 'Storehouse').first
-          ist.update( value: (ist.value + thing.value))
-        else
-          t.save
+      things_params[:thing].each do |param|
+        thing = Thing.new(param[1])
+        if thing.value.present? && thing.value > 0
+          thing.shipment = @delivery
+          in_st = Thing.find_by(commodity_id: thing.commodity_id, shipment_id: @storehouse.id, shipment_type: 'Storehouse')
+          if in_st.present?
+            in_st.update(value: (in_st.value + thing.value))
+          else
+            to_store = Thing.new(commodity_id: thing.commodity_id, value: thing.value, shipment: @storehouse)
+            to_store.save
+          end
+          thing.save
+          @things = thing
         end
       end
-    end
       if @things.present?
+        @delivery.save
         redirect_to @delivery.storehouse, notice: 'Delivery was successfully created.'
       else
-        render :new, status: :unprocessable_entity
+        redirect_to new_storehouse_delivery_path(@storehouse)
       end
     rescue ActiveRecord::RecordInvalid
-      render :new, status: :unprocessable_entity
+      redirect_to new_storehouse_delivery_path(@storehouse)
     end
   end
 
@@ -51,6 +54,7 @@ class DeliveriesController < ApplicationController
   def delivery_params
     params.require(:delivery).permit(:storehouse_id, :date_of_delivery)
   end
+
   def things_params
     params.require(:delivery).permit(thing: [:commodity_id, :value])
   end

@@ -5,6 +5,6 @@ module StorehousesHelper
 
   def date_of_last_delivery(storehouse, thing)
     deliveries = storehouse&.deliveries
-    deliveries.filter{ |d|  d.things.map(&:commodity).include?(thing.commodity) }&.map(&:date_of_delivery).compact.max
+    deliveries.filter{ |d|  d.things.map(&:commodity).include?(thing.commodity) }&.map(&:date_of_delivery).compact.max&.strftime("%Y-%m-%d")
   end
 end

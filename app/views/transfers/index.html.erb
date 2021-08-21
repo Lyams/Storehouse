@@ -17,7 +17,7 @@
     <%= thing.commodity.name %> : <%= thing.value %>
       <br>
   <% end %> </th>
-      <th> <%= transfer.created_at %> </th> </tr>
+      <th> <%= transfer.created_at.strftime("%Y-%m-%d") %> </th> </tr>
 <% end %>
 
 <% @transfers_recip.each do |transfer| %>
@@ -28,7 +28,7 @@
           <%= thing.commodity.name %> : <%= thing.value %>
           <br>
         <% end %> </th>
-      <th> <%= transfer.created_at %> </th>
+      <th> <%= transfer.created_at.strftime("%Y-%m-%d") %> </th>
     </tr>
     <% end %>
   </tbody>

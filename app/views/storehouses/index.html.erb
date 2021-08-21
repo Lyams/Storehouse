@@ -16,7 +16,7 @@
     <% @storehouses.each do |storehouse| %>
       <tr>
         <td><%= storehouse.title %></td>
-        <td><%= storehouse.created_at.to_formatted_s(:long)   %></td>
+        <td><%= storehouse.created_at.strftime("%Y-%m-%d") %></td>
         <td><%= button_to (t 'storehouse.show'),  storehouse, method: :get %></td>
         <td><%= button_to (t 'storehouse.del'), storehouse, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

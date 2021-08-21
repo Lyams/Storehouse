@@ -4,13 +4,11 @@
     <thead>
     <tr>
       <th><%=t 'commodity.name' %></th>
-      <th><%='Количество товара у отправителя' %></th>
-      <th><%=t 'delivery.count' %></th>
-      <th><%='Количество товаров у получателя' %>
-      <th colspan="2"></th>
+      <th><%= t 'transfer.value_sender' %></th>
+      <th><%=t 'transfer.count' %></th>
+      <th><%= t 'transfer.value_recip' %></th>
     </tr>
     </thead>
-
     <tbody>
     <%= transfer_form.hidden_field :sender_id, value: @sender.id %>
     <%= transfer_form.hidden_field :recipient_id, value: @recipient.id %>
@@ -21,7 +19,7 @@
           <th>  <%= thing_form.label thing.value %>
             <%= thing_form.hidden_field :commodity_id, value: thing.commodity.id  %>
           </th>
-          <th>  <%= thing_form.number_field :value %> </th>
+          <th>  <%= thing_form.number_field :value, placeholder: 0 %> </th>
           <th> <%= thing_form.label @recipient.things.where(commodity_id: thing.commodity_id).first&.value || 0 %></th>
         </tr>
       <% end %>
@@ -30,5 +28,5 @@
     </tbody>
 
   </table>
-  <%= transfer_form.submit ("Завершить процесс передачи товаров") %>
+  <%= transfer_form.submit (t 'transfer.ending') %>
 <% end %>

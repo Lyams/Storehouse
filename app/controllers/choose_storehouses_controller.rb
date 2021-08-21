@@ -1,6 +1,6 @@
 class ChooseStorehousesController < ApplicationController
   def new
-    @storehouses = Storehouse.all# url: new_transfer_url, method: :get
+    @storehouses = Storehouse.all # url: new_transfer_url, method: :get
     @transfer = Transfer.new
   end
   def create

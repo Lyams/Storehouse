@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <h1><%= t 'commodity.list'%></h1>
 
 <table>
@@ -8,6 +6,7 @@
     <th><%=t 'commodity.name' %></th>
     <th><%=t 'commodity.date_of_creation' %></th>
     <th><%=t 'commodity.date_of_editing' %></th>
+    <th><%= t 'doing' %></th>
     <th colspan="4"></th>
   </tr>
   </thead>
@@ -16,8 +15,8 @@
   <% @commodities.each do |commodity| %>
     <tr>
       <td><%= commodity.name %></td>
-      <td><%= commodity.created_at %></td>
-      <td><%= commodity.updated_at %></td>
+      <td><%= commodity.created_at.strftime("%Y-%m-%d") %></td>
+      <td><%= commodity.updated_at.strftime("%Y-%m-%d") %></td>
       <td><%= link_to (t 'commodity.edit'), edit_commodity_path(commodity)  %>
       <%= link_to (t 'commodity.del'), commodity, method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>

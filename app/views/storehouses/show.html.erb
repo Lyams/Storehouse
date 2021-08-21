@@ -1,19 +1,15 @@
-<p>
-  <strong>Title:</strong>
-  <%= @storehouse.title %>
-</p>
+<h1> <%= (t 'storehouse.page') + @storehouse.title %> </h1>
 
-<p>
-  <strong>District:</strong>
-  <%= @storehouse.district %>
-</p>
+<p> <strong><%= t :district %>: </strong> <%= @storehouse.district %> </p>
 
 <%= render template: 'things/index'%>
-<%= link_to (t 'delivery.new'),  new_storehouse_delivery_path(@storehouse) %>
 <br>
-<%= link_to 'История доставок',  storehouse_deliveries_path(@storehouse) %>
+<%=  button_to (t 'delivery.new'),  new_storehouse_delivery_path(@storehouse), method: :get %>
 <br>
-<%= link_to 'Передача товаров',  new_choose_storehouse_path %>
+<%=  button_to 'История доставок',  storehouse_deliveries_path(@storehouse), method: :get %>
 <br>
-<%= link_to 'История передач товара', transfers_path(storehouse_id: @storehouse.id) %>
+<%=  button_to  'Передача товаров',  new_choose_storehouse_path, method: :get %>
+<br>
+<%=  button_to  'История передач товара', transfers_path(storehouse_id: @storehouse.id), method: :get, params: {storehouse_id: @storehouse.id}  %>
+<br>
 <%= link_to (t :back), storehouses_path %>

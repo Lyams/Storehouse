@@ -1,11 +1,11 @@
-<h1><%= t 'delivery.new'%></h1>
-<%= form_with(model:  @transfer)  do |transfer_form| %>
+<h1><%= t 'delivery.new' %></h1>
+<%= form_with(model: @transfer) do |transfer_form| %>
   <table>
     <thead>
     <tr>
-      <th><%=t 'commodity.name' %></th>
+      <th><%= t 'commodity.name' %></th>
       <th><%= t 'transfer.value_sender' %></th>
-      <th><%=t 'transfer.count' %></th>
+      <th><%= t 'transfer.count' %></th>
       <th><%= t 'transfer.value_recip' %></th>
     </tr>
     </thead>
@@ -17,16 +17,14 @@
         <tr>
           <th>  <%= thing_form.label thing.commodity.name %> </th>
           <th>  <%= thing_form.label thing.value %>
-            <%= thing_form.hidden_field :commodity_id, value: thing.commodity.id  %>
+            <%= thing_form.hidden_field :commodity_id, value: thing.commodity.id %>
           </th>
           <th>  <%= thing_form.number_field :value, placeholder: 0 %> </th>
           <th> <%= thing_form.label @recipient.things.where(commodity_id: thing.commodity_id).first&.value || 0 %></th>
         </tr>
       <% end %>
     <% end %>
-
     </tbody>
-
   </table>
   <%= transfer_form.submit (t 'transfer.ending') %>
 <% end %>

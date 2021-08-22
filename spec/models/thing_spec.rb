@@ -11,7 +11,9 @@ RSpec.describe Thing, type: :model do
     it { is_expected.to be_valid }
   end
   describe 'association' do
-    it { is_expected.to belong_to :storehouse }
+    it { is_expected.to belong_to :shipment }
     it { is_expected.to belong_to :commodity }
+    it { is_expected.to have_db_column(:shipment_id).of_type(:integer) }
+    it { is_expected.to have_db_column(:shipment_type).of_type(:string) }
   end
 end

@@ -16,7 +16,7 @@
           <th>  <%= thing_form.label thing.commodity.name %>
             <%= thing_form.hidden_field :commodity_id, value: thing.commodity.id %>
           </th>
-          <th>  <%= thing_form.number_field :value %> </th>
+          <th>  <%= thing_form.number_field :value, min: 0 %> </th>
         </tr>
       <% end %>
     <% end %>
@@ -24,6 +24,7 @@
     </tbody>
 
   </table>
+  <%= delivery_form.label (t 'delivery.date') %>
   <%= delivery_form.date_field :date_of_delivery %>
-  <%= delivery_form.submit (t 'delivery.new') %>
+  <%= delivery_form.submit (t 'delivery.checkout') %>
 <% end %>

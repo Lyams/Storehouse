@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :thing do
     association :commodity
-    association :storehouse
     value { 5 }
+    shipment { build(:storehouse) }
   end
 end

@@ -19,7 +19,6 @@ module TransfersHelper
       end
       if @things.present?
         transfer.save
-        true
       else
         raise ActiveRecord::RecordInvalid
       end

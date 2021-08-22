@@ -1,5 +1,4 @@
 <h1><%= t 'commodity.new_title' %></h1>
 
-<%= render 'form', commodity: @commodity %>
-
+<%= render 'form', commodity: @commodity, name_button: (t 'commodity.new') %>
 <%= link_to (t 'back'), commodities_path %>

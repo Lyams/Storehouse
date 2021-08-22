@@ -19,7 +19,6 @@ module DeliveriesHelper
       end
       if @things.present?
         delivery.save
-        true
       else
         raise ActiveRecord::RecordInvalid
       end

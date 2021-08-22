@@ -17,7 +17,7 @@ class CommoditiesController < ApplicationController
     @commodity = Commodity.new(commodity_params)
     respond_to do |format|
       if @commodity.save
-        format.html { redirect_to @commodity, notice: (I18n.t 'commodity.was_created') }
+        format.html { redirect_to commodities_path, notice: (I18n.t 'commodity.was_created') }
       else
         format.html { render :new, status: :unprocessable_entity }
       end
@@ -27,7 +27,7 @@ class CommoditiesController < ApplicationController
   def update
     respond_to do |format|
       if @commodity.update(commodity_params)
-        format.html { redirect_to @commodity, notice: (I18n.t 'commodity.was_updated') }
+        format.html { redirect_to commodities_path, notice: (I18n.t 'commodity.was_updated') }
       else
         format.html { render :new, status: :unprocessable_entity }
       end

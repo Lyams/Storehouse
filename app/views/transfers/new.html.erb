@@ -1,4 +1,4 @@
-<h1><%= t 'delivery.new' %></h1>
+<h1><%= t 'transfer.new' %></h1>
 <%= form_with(model: @transfer) do |transfer_form| %>
   <table>
     <thead>
@@ -19,7 +19,7 @@
           <th>  <%= thing_form.label thing.value %>
             <%= thing_form.hidden_field :commodity_id, value: thing.commodity.id %>
           </th>
-          <th>  <%= thing_form.number_field :value, placeholder: 0 %> </th>
+          <th>  <%= thing_form.number_field :value, value: 0, min: 0 %> </th>
           <th> <%= thing_form.label @recipient.things.where(commodity_id: thing.commodity_id).first&.value || 0 %></th>
         </tr>
       <% end %>

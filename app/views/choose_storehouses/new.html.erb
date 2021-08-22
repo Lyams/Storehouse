@@ -1,4 +1,5 @@
 <%= form_with url: choose_storehouses_url do |form|  %>
+  <h1> Передача товаров </h1>
   <%= form.submit (t 'transfer.starting')%>
   <%= form.select :sender_id, @storehouses.map {|t| [t.title, t.id]} %>
   <%= form.select :recipient_id, @storehouses.map{|t| [t.title, t.id]} %>

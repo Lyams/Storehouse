@@ -1,24 +1,5 @@
 # README
+Тестовое задание: Приложение Склады.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+В истории доставок не стал делать столбец "Дата редактирования", т.к. мы не редактируем доставки.
+У нас нет этого в задании.

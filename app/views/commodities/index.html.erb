@@ -17,8 +17,8 @@
       <td><%= commodity.name %></td>
       <td><%= commodity.created_at.strftime("%Y-%m-%d") %></td>
       <td><%= commodity.updated_at.strftime("%Y-%m-%d") %></td>
-      <td><%= link_to (t 'commodity.edit'), edit_commodity_path(commodity) %>
-        <%= link_to (t 'commodity.del'), commodity, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <td><%= button_to (t 'commodity.edit'), edit_commodity_path(commodity), method: :get %>
+        <%= button_to (t 'commodity.del'), commodity, method: :delete, data: { confirm: (t 'are_you_sure') } %></td>
     </tr>
   <% end %>
   </tbody>
@@ -26,4 +26,4 @@
 
 <br>
 
-<%= link_to (t 'commodity.new'), new_commodity_path %>
+<%= button_to (t 'commodity.new'), new_commodity_path, method: :get %>

@@ -35,17 +35,16 @@ class CommoditiesController < ApplicationController
     end
   end
 
-
   def destroy
     if @commodity.deliveries.present? || @commodity.transfers.present? || @commodity.storehouses.present?
       redirect_back fallback_location: storehouses_path,
-                    notice:  'Нельзя удалить товар с наличием  на складах или историей доставок или историей передач'
+                    notice: 'Нельзя удалить товар с наличием  на складах или историей доставок или историей передач'
     else
-    @commodity.destroy
-    respond_to do |format|
-      format.html { redirect_to commodities_path, notice: 'Commodity was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+      @commodity.destroy
+      respond_to do |format|
+        format.html { redirect_to commodities_path, notice: 'Commodity was successfully destroyed.' }
+        format.json { head :no_content }
+      end
     end
   end
 

@@ -23,35 +23,18 @@ class StorehousesController < ApplicationController
     respond_to do |format|
       if @storehouse.save
         format.html { redirect_to @storehouse, notice: 'Storehouse was successfully created.' }
-        format.json { render :show, status: :created, location: @storehouse }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @storehouse.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # # PATCH/PUT /storehouses/1 or /storehouses/1.json
-  # def update
-  #   respond_to do |format|
-  #     if @storehouse.update(storehouse_params)
-  #       format.html { redirect_to @storehouse, notice: "Storehouse was successfully updated." }
-  #       format.json { render :show, status: :ok, location: @storehouse }
-  #     else
-  #       format.html { render :edit, status: :unprocessable_entity }
-  #       format.json { render json: @storehouse.errors, status: :unprocessable_entity }
-  #     end
-  #   end
-  # end
-
-  # DELETE /storehouses/1 or /storehouses/1.json
   def destroy
     if @storehouse.things.blank?
-    @storehouse.destroy
-    respond_to do |format|
-      format.html { redirect_to storehouses_url, notice: 'Storehouse was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+      @storehouse.destroy
+      respond_to do |format|
+        format.html { redirect_to storehouses_url, notice: 'Storehouse was successfully destroyed.' }
+      end
     else
       redirect_to @storehouse, notice: 'Склад нельзя удалять, если на нём есть товары'
     end

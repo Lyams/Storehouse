@@ -15,10 +15,9 @@ class CommoditiesController < ApplicationController
 
   def create
     @commodity = Commodity.new(commodity_params)
-
     respond_to do |format|
       if @commodity.save
-        format.html { redirect_to @commodity, notice: 'Commodity was successfully created.' }
+        format.html { redirect_to @commodity, notice: (I18n.t 'commodity.was_created') }
       else
         format.html { render :new, status: :unprocessable_entity }
       end
@@ -28,7 +27,7 @@ class CommoditiesController < ApplicationController
   def update
     respond_to do |format|
       if @commodity.update(commodity_params)
-        format.html { redirect_to @commodity, notice: 'Commodity was successfully updated.' }
+        format.html { redirect_to @commodity, notice: (I18n.t 'commodity.was_updated') }
       else
         format.html { render :new, status: :unprocessable_entity }
       end
@@ -37,13 +36,11 @@ class CommoditiesController < ApplicationController
 
   def destroy
     if @commodity.deliveries.present? || @commodity.transfers.present? || @commodity.storehouses.present?
-      redirect_back fallback_location: storehouses_path,
-                    notice: 'Нельзя удалить товар с наличием  на складах или историей доставок или историей передач'
+      redirect_back fallback_location: storehouses_path, notice: (I18n.t 'commodity.ban_on_deletion')
     else
       @commodity.destroy
       respond_to do |format|
-        format.html { redirect_to commodities_path, notice: 'Commodity was successfully destroyed.' }
-        format.json { head :no_content }
+        format.html { redirect_to commodities_path, notice: (I18n.t 'commodity.was_destroyed') }
       end
     end
   end

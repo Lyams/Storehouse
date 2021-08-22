@@ -1,6 +1,6 @@
 class ChooseStorehousesController < ApplicationController
   def new
-    @storehouses = Storehouse.all # url: new_transfer_url, method: :get
+    @storehouses = Storehouse.all
     @transfer = Transfer.new
   end
 
@@ -10,7 +10,7 @@ class ChooseStorehousesController < ApplicationController
     if @sender == @recipient
       @transfer = Transfer.new
       @storehouses = Storehouse.all
-      render :new, status: :unprocessable_entity, notice: 'Должны быть разные склады'
+      render :new, status: :unprocessable_entity, notice: (I18n.t 'transfer.identical_storehouse')
     else
       redirect_to new_transfer_path(sender_id: @sender.id, recipient_id: @recipient.id)
     end

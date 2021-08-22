@@ -33,6 +33,7 @@ en:
   new_storehouse: 'New Storehouse'
   hello: "Hello world"
   template_title: "This is title. Minimum length = 2"
+  are_you_sure: 'Are you sure?'
   enumerize:
     storehouse:
       district:

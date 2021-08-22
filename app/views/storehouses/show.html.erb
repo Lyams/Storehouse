@@ -1,15 +1,15 @@
 <h1> <%= (t 'storehouse.page') + @storehouse.title %> </h1>
 
-<p> <strong><%= t :district %>: </strong> <%= @storehouse.district %> </p>
+<p><strong><%= t :district %>: </strong> <%= @storehouse.district %> </p>
 
-<%= render template: 'things/index'%>
+<%= render template: 'things/index' %>
 <br>
-<%=  button_to (t 'delivery.new'),  new_storehouse_delivery_path(@storehouse), method: :get %>
+<%= button_to (t 'delivery.new'), new_storehouse_delivery_path(@storehouse), method: :get %>
 <br>
-<%=  button_to 'История доставок',  storehouse_deliveries_path(@storehouse), method: :get %>
+<%= button_to 'История доставок', storehouse_deliveries_path(@storehouse), method: :get %>
 <br>
-<%=  button_to  'Передача товаров',  new_choose_storehouse_path, method: :get %>
+<%= button_to 'Передача товаров', new_choose_storehouse_path, method: :get %>
 <br>
-<%=  button_to  'История передач товара', transfers_path(storehouse_id: @storehouse.id), method: :get, params: {storehouse_id: @storehouse.id}  %>
+<%= button_to 'История передач товара', transfers_path(storehouse_id: @storehouse.id), method: :get, params: { storehouse_id: @storehouse.id } %>
 <br>
 <%= link_to (t :back), storehouses_path %>

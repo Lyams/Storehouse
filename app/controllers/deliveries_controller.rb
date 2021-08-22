@@ -15,7 +15,7 @@ class DeliveriesController < ApplicationController
     @delivery = Delivery.new(delivery_params)
     @storehouse = @delivery.storehouse
     if helpers.delivery_transaction(things_params: things_params, storehouse: @storehouse, delivery: @delivery)
-      redirect_to @delivery.storehouse, notice: 'Delivery was successfully created.'
+      redirect_to @delivery.storehouse, notice: (I18n.t 'delivery.success_created')
     else
       redirect_to new_storehouse_delivery_path(@storehouse)
     end

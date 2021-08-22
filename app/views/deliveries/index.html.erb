@@ -1,17 +1,18 @@
 <table>
   <thead>
   <tr>
-    <th><%=t 'delivery.date' %></th>
-    <th><%=t 'delivery.done' %></th>
+    <th><%= t 'delivery.date' %></th>
+    <th><%= t 'delivery.done' %></th>
   </tr>
   </thead>
   <tbody>
 
-<% @deliveries.each do |delivery| %>
+  <% @deliveries.each do |delivery| %>
     <tr>
       <th> <%= delivery.date_of_delivery %> </th>
-      <th> <% delivery.things.each do |thing| %>
-    <%= thing.commodity.name %> : <%= thing.value %>
+      <th>
+        <% delivery.things.each do |thing| %>
+          <%= thing.commodity.name %> : <%= thing.value %>
           <br>
         <% end %></th>
-<% end %>
+  <% end %>

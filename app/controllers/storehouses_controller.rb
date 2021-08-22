@@ -19,10 +19,9 @@ class StorehousesController < ApplicationController
   # POST /storehouses or /storehouses.json
   def create
     @storehouse = Storehouse.new(storehouse_params)
-
     respond_to do |format|
       if @storehouse.save
-        format.html { redirect_to @storehouse, notice: 'Storehouse was successfully created.' }
+        format.html { redirect_to @storehouse, notice: (I18n.t 'storehouse.success_created') }
       else
         format.html { render :new, status: :unprocessable_entity }
       end
@@ -33,10 +32,10 @@ class StorehousesController < ApplicationController
     if @storehouse.things.blank?
       @storehouse.destroy
       respond_to do |format|
-        format.html { redirect_to storehouses_url, notice: 'Storehouse was successfully destroyed.' }
+        format.html { redirect_to storehouses_url, notice: (I18n.t 'storehouse.was_destroyed') }
       end
     else
-      redirect_to @storehouse, notice: 'Склад нельзя удалять, если на нём есть товары'
+      redirect_to @storehouse, notice: (I18n.t 'storehouse.ban_on_deletion')
     end
   end
 

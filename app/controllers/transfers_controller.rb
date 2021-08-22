@@ -18,11 +18,12 @@ class TransfersController < ApplicationController
     @transfer = Transfer.new(transfer_params)
     @sender = @transfer.sender
     @recipient = @transfer.recipient
-    if helpers.transfer_transaction(things_params: things_params, sender: @sender, transfer: @transfer, recipient: @recipient)
-      redirect_to @recipient, notice: 'Transaction was successfully created.'
+    if helpers.transfer_transaction(things_params: things_params, sender: @sender,
+                                    transfer: @transfer, recipient: @recipient)
+      redirect_to @recipient, notice: (I18n.t 'transfer.success_created')
     else
       redirect_to new_transfer_path(sender_id:  @sender.id, recipient_id: @recipient.id),
-                  notice: 'Что-то пошло не так, попробуйте ещё раз'
+                  notice: (I18n.t 'transfer.failed_created')
     end
   end
 

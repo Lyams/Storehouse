@@ -1,35 +1,39 @@
 <table>
   <thead>
   <tr>
-    <th><%=t 'transfer.sender' %></th>
-    <th><%=t 'transfer.recipient' %></th>
-    <th><%=t 'transfer.transferred' %></th>
-    <th><%=t 'transfer.date' %>
+    <th><%= t 'transfer.sender' %></th>
+    <th><%= t 'transfer.recipient' %></th>
+    <th><%= t 'transfer.transferred' %></th>
+    <th><%= t 'transfer.date' %>
   </tr>
   </thead>
   <tbody>
-<% @transfers_send.each do |transfer| %>
+
+  <% @transfers_send.each do |transfer| %>
     <tr>
       <th> <%= @storehouse.title %> </th>
       <th>  <%= transfer.recipient.title %> </th>
 
-  <th><% transfer.things.each do |thing| %>
-    <%= thing.commodity.name %> : <%= thing.value %>
-      <br>
-  <% end %> </th>
-      <th> <%= transfer.created_at.strftime("%Y-%m-%d") %> </th> </tr>
-<% end %>
-
-<% @transfers_recip.each do |transfer| %>
-    <tr> <th>  <%= transfer.sender.title %> </th>
-      <th> <%= @storehouse.title %> </th>
-
-      <th><% transfer.things.each do |thing| %>
+      <th>
+        <% transfer.things.each do |thing| %>
           <%= thing.commodity.name %> : <%= thing.value %>
           <br>
         <% end %> </th>
       <th> <%= transfer.created_at.strftime("%Y-%m-%d") %> </th>
     </tr>
-    <% end %>
+  <% end %>
+
+  <% @transfers_recip.each do |transfer| %>
+    <tr>
+      <th>  <%= transfer.sender.title %> </th>
+      <th> <%= @storehouse.title %> </th>
+      <th>
+        <% transfer.things.each do |thing| %>
+          <%= thing.commodity.name %> : <%= thing.value %>
+          <br>
+        <% end %> </th>
+      <th> <%= transfer.created_at.strftime("%Y-%m-%d") %> </th>
+    </tr>
+  <% end %>
   </tbody>
 </table>

@@ -20,7 +20,7 @@
           <%= thing.commodity.name %> : <%= thing.value %>
           <br>
         <% end %> </th>
-      <th> <%= transfer.created_at.strftime("%Y-%m-%d") %> </th>
+      <th> <%= l transfer.created_at, format: :long %> </th>
     </tr>
   <% end %>
 
@@ -33,7 +33,7 @@
           <%= thing.commodity.name %> : <%= thing.value %>
           <br>
         <% end %> </th>
-      <th> <%= transfer.created_at.strftime("%Y-%m-%d") %> </th>
+      <th> <%= l transfer.created_at, format: :long %> </th>
     </tr>
   <% end %>
   </tbody>

@@ -25,6 +25,6 @@
 
   </table>
   <%= delivery_form.label (t 'delivery.date') %>
-  <%= delivery_form.date_field :date_of_delivery %>
+  <%= delivery_form.date_field :date_of_delivery, required: true %>
   <%= delivery_form.submit (t 'delivery.checkout') %>
 <% end %>

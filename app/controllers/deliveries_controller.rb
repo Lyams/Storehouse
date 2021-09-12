@@ -1,4 +1,5 @@
 class DeliveriesController < ApplicationController
+  include DeliverySaver
   def new
     @storehouse = Storehouse.find(params[:storehouse_id])
     @delivery = Delivery.new
@@ -14,7 +15,7 @@ class DeliveriesController < ApplicationController
   def create
     @delivery = Delivery.new(delivery_params)
     @storehouse = @delivery.storehouse
-    if helpers.delivery_transaction(things_params: things_params, storehouse: @storehouse, delivery: @delivery)
+    if delivery_transaction(things_params: things_params, storehouse: @storehouse, delivery: @delivery)
       redirect_to @delivery.storehouse, notice: (I18n.t 'delivery.success_created')
     else
       redirect_to new_storehouse_delivery_path(@storehouse)

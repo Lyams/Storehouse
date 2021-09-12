@@ -1,4 +1,4 @@
-module DeliveriesHelper
+module DeliverySaver
   def delivery_transaction(things_params:, storehouse:, delivery:)
     Delivery.transaction do
       @things = []

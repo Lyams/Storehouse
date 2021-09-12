@@ -1,5 +1,5 @@
 class TransfersController < ApplicationController
-
+  include TransferSaver
   def index
     @storehouse = Storehouse.find(params[:storehouse_id])
     @transfers_send = Transfer.where(sender: @storehouse)
@@ -18,7 +18,7 @@ class TransfersController < ApplicationController
     @transfer = Transfer.new(transfer_params)
     @sender = @transfer.sender
     @recipient = @transfer.recipient
-    if helpers.transfer_transaction(things_params: things_params, sender: @sender,
+    if transfer_transaction(things_params: things_params, sender: @sender,
                                     transfer: @transfer, recipient: @recipient)
       redirect_to @recipient, notice: (I18n.t 'transfer.success_created')
     else

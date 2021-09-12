@@ -1,4 +1,4 @@
-module TransfersHelper
+module TransferSaver
   def transfer_transaction(things_params:, sender:, transfer:, recipient:)
     Transfer.transaction do
       @things = []

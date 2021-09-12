@@ -1,15 +1,20 @@
 class DeliveriesController < ApplicationController
   include DeliverySaver
+
   def new
-    @storehouse = Storehouse.find(params[:storehouse_id])
-    @delivery = Delivery.new
-    @things = Commodity.all.map do |com|
-      thing = Thing.new
-      thing.commodity_id = com.id
-      thing.value = 0
-      thing
+    if Commodity.take.blank?
+      redirect_to commodities_path, notice: (t 'commodity.has_not')
+    else
+      @storehouse = Storehouse.find(params[:storehouse_id])
+      @delivery = Delivery.new
+      @things = Commodity.all.map do |com|
+        thing = Thing.new
+        thing.commodity_id = com.id
+        thing.value = 0
+        thing
+      end
+      @delivery.things = @things
     end
-    @delivery.things = @things
   end
 
   def create

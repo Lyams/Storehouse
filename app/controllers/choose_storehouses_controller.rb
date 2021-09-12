@@ -1,7 +1,11 @@
 class ChooseStorehousesController < ApplicationController
   def new
-    @storehouses = Storehouse.all
-    @transfer = Transfer.new
+    if Commodity.take.blank?
+      redirect_to commodities_path, notice: (t 'commodity.has_not')
+    else
+      @storehouses = Storehouse.all
+      @transfer = Transfer.new
+    end
   end
 
   def create

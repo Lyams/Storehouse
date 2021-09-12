@@ -1,5 +1,6 @@
 class TransfersController < ApplicationController
   include TransferSaver
+
   def index
     @storehouse = Storehouse.find(params[:storehouse_id])
     @transfers_send = Transfer.where(sender: @storehouse)
@@ -7,11 +8,11 @@ class TransfersController < ApplicationController
   end
 
   def new
-    @sender = Storehouse.find(storehouses_params[:sender_id])
-    @recipient = Storehouse.find(storehouses_params[:recipient_id])
-    @transfer = Transfer.new(sender: @sender, recipient: @recipient)
-    @commodities = Commodity.all
-    @things = @sender.things
+      @sender = Storehouse.find(storehouses_params[:sender_id])
+      @recipient = Storehouse.find(storehouses_params[:recipient_id])
+      @transfer = Transfer.new(sender: @sender, recipient: @recipient)
+      @commodities = Commodity.all
+      @things = @sender.things
   end
 
   def create
@@ -19,10 +20,10 @@ class TransfersController < ApplicationController
     @sender = @transfer.sender
     @recipient = @transfer.recipient
     if transfer_transaction(things_params: things_params, sender: @sender,
-                                    transfer: @transfer, recipient: @recipient)
+                            transfer: @transfer, recipient: @recipient)
       redirect_to @recipient, notice: (I18n.t 'transfer.success_created')
     else
-      redirect_to new_transfer_path(sender_id:  @sender.id, recipient_id: @recipient.id),
+      redirect_to new_transfer_path(sender_id: @sender.id, recipient_id: @recipient.id),
                   notice: (I18n.t 'transfer.failed_created')
     end
   end

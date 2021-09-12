@@ -13,7 +13,7 @@
 ActiveRecord::Schema.define(version: 2021_08_20_144634) do
 
   create_table "commodities", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -22,19 +22,19 @@ ActiveRecord::Schema.define(version: 2021_08_20_144634) do
     t.integer "storehouse_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.date "date_of_delivery"
+    t.date "date_of_delivery", null: false
     t.index ["storehouse_id"], name: "index_deliveries_on_storehouse_id"
   end
 
   create_table "storehouses", force: :cascade do |t|
-    t.string "title"
-    t.string "district"
+    t.string "title", null: false
+    t.string "district", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "things", force: :cascade do |t|
-    t.integer "value"
+    t.integer "value", null: false
     t.integer "commodity_id", null: false
     t.string "shipment_type", null: false
     t.integer "shipment_id", null: false
